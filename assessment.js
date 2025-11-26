@@ -13,16 +13,27 @@ assessmentButton.addEventListener(    //assessmentButton から以下のイベ�
        return;
      }
 
-    // TODO ツイートエリアの作成
-    resultDivision.innerText = '';                     //関数が実行される度に空っぽにする
-    const header = document.createElement('h3')        // h3タグの要素を作成して代入
-    header.innerText = '診断結果';                      // headerに診断結果という文字列を入力
-    resultDivision.appendChild(header);                // devタグに子要素として変数headerを入れてID経由で上記の内容を出力
+    // headerDivision の作成
+    const headerDivision = document.createElement('div');                   //変数にdivタグを生成
+    headerDivision.setAttribute('class', 'card-header text-bg-primary');    //divタグの中にclass(card-header,text-bg-primary(背景に色を指定))の要素を設定
+    headerDivision.innerText = '診断結果';
 
-    const paragraph = document.createElement('p');     // pタグの要素を作成して代入
-    const result = assessment(userName);               // 変数resultにassessment関数の結果を代入
-    paragraph.innerText = result;                      //resultの内容をpタグで作成
-    resultDivision.appendChild(paragraph);             //devタグに子要素として変数paragraphを入れて出力
+    // bodyDivision の作成
+    const bodyDivision = document.createElement('div');                     //変数にdivタグを生成
+    bodyDivision.setAttribute('class', 'card-body');                        //divタグの中にclass(card-header)の要素を設定
+
+    const paragraph = document.createElement('p');                          //変数にpタグを生成
+    paragraph.setAttribute('class', 'card-text');                           //変数にclassを設定
+    const result = assessment(userName);
+    paragraph.innerText = result;
+    bodyDivision.appendChild(paragraph);    
+
+    // resultDivision に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute('class', 'card');
+
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
     
     //Twitterのエリア作成
     tweetDivision.innerText = '';
